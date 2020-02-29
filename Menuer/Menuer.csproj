@@ -107,6 +107,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include=".gitattributes" />
+    <None Include=".gitignore" />
     <None Include="Other\dbase.db" />
     <None Include="Other\packages.config" />
     <None Include="Properties\Settings.settings">
@@ -121,6 +123,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Other\App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
