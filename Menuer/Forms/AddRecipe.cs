@@ -39,7 +39,7 @@ namespace Menuer.Forms
                     products[i].Used = true;
                     products[i].Importance = importance;
                     products[i].LocalWeight = amount;
-                    string conf = $"{products[i].Name}x{amount} {Measures[products[i].Unit]}, важность {importance}%";
+                    string conf = $"{products[i].Name} x {amount} {Measures[products[i].Unit]}, важность {importance}%";
                     lbProducts.Items.Add(conf);
                      
                 }
@@ -90,6 +90,12 @@ namespace Menuer.Forms
             }
 
 
+        }
+
+        private void BtCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+           // this.Refresh();
         }
     }
 }

@@ -13,7 +13,7 @@ using Menuer.Forms;
 
 namespace Menuer
 {
-
+    
     public partial class Form1 : Form
     {
         public string version = "v0.1";
@@ -40,6 +40,11 @@ namespace Menuer
         {
             Form addRecipe = new AddRecipe();
             addRecipe.Show();
+        }
+
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+            lbTime.Text = DateTime.Now.ToShortTimeString();
         }
     }
 }

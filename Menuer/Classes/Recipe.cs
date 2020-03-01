@@ -13,6 +13,16 @@ namespace Menuer
         private Product[] Products;
         private double[] weights;
         private double[] importances;
+        private int cookingTime;
+        public Recipe()
+        {
+
+        }
+        public int CookingTime
+        {
+            get { return cookingTime; }
+            set { cookingTime = value; }
+        }
         public string Name
         {
             get { return name; }

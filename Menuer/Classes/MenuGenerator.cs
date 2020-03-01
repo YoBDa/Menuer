@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-namespace Menuer
+namespace Menuer.Classes
 {
-    class Importance
+    class MenuGenerator
     {
-
-        double d = 0;
-        
     }
 }

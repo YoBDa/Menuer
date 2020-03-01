@@ -244,6 +244,7 @@
             this.btCancel.TabIndex = 12;
             this.btCancel.Text = "Отмена";
             this.btCancel.UseVisualStyleBackColor = true;
+            this.btCancel.Click += new System.EventHandler(this.BtCancel_Click);
             // 
             // AddRecipe
             // 
