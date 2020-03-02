@@ -13,7 +13,8 @@ namespace Menuer.Forms
     public partial class AddRecipe : Form
     {
         Product[] products;
-        DataTable productsTable= new DataTable();
+        DataTable productsTable = new DataTable();
+        DataTable categoriesTable = new DataTable();
 
         public AddRecipe()
         {
@@ -29,9 +30,23 @@ namespace Menuer.Forms
                 Measures[i] = units.Rows[i].ItemArray[0].ToString();
             }
             string name = cbName.Text;
-            if (!double.TryParse(tbAmount.Text, out double amount)) return;
-            if (!double.TryParse(tbImportace.Text, out double importance)) return;
-            if (name == "" || amount == 0 || (importance < 0 && importance > 100)) return;
+            if (!double.TryParse(tbAmount.Text, out double amount)) 
+            {
+                MessageBox.Show("Неверное количество!", "Внимание!");
+                return;
+            }
+            if (!double.TryParse(tbImportace.Text, out double importance))
+            {
+                MessageBox.Show("Неверная важность!", "Внимание!");
+                return;
+            }
+            
+            if (name == "" || amount == 0 || (importance < 0 && importance > 100))
+            {
+                MessageBox.Show("Неверные данные продукта!", "Внимание!");
+                return;
+
+            } //проверка на пустоту
             for (int i = 0; i < products.Length; i++)
             {
                 if (products[i].Name == name)
@@ -50,6 +65,8 @@ namespace Menuer.Forms
         private void AddRecipe_Load(object sender, EventArgs e)
         {
             string productsQuery = "SELECT ID, Name, Calories, Amount, UnitID, Cost FROM Products";
+            string categoryQuery = "SELECT ID, Category FROM Categories";
+            categoriesTable = DBOps.ReadDB(categoryQuery);
             productsTable = DBOps.ReadDB(productsQuery);
             products = new Product[productsTable.Rows.Count];
             for (int i = 0; i < products.Length; i++)
@@ -61,8 +78,12 @@ namespace Menuer.Forms
                 products[i].Amount = (double)productsTable.Rows[i].ItemArray[3];
                 products[i].Unit = int.Parse(productsTable.Rows[i].ItemArray[4].ToString());
                 products[i].Cost = int.Parse(productsTable.Rows[i].ItemArray[5].ToString());
-
             }
+            for (int i = 0; i < categoriesTable.Rows.Count; i++)
+            {
+                cbCategory.Items.Add(categoriesTable.Rows[i].ItemArray[1]);
+            }
+
             
         }
 
@@ -96,6 +117,25 @@ namespace Menuer.Forms
         {
             this.Close();
            // this.Refresh();
+        }
+
+        private void BtRemoveProduct_Click(object sender, EventArgs e)
+        {
+            object SI = lbProducts.SelectedItem;
+            if (SI != null)
+            {
+                int fi = SI.ToString().IndexOf('x');
+                for (int i = 0; i < products.Length; i++)
+                {
+                    
+                    if (products[i].Name == SI.ToString().Substring(0, fi-1));
+                    {
+                        products[i].Used = false;
+                        lbProducts.Items.Remove(SI);
+
+                    }
+                }
+            }
         }
     }
 }
