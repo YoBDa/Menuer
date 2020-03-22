@@ -33,11 +33,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tbDescription = new System.Windows.Forms.RichTextBox();
             this.panAdd = new System.Windows.Forms.Panel();
+            this.btRemoveProduct = new System.Windows.Forms.Button();
             this.btAddProduct = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
-            this.tbImportace = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lbUnit = new System.Windows.Forms.Label();
             this.tbAmount = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -50,17 +50,18 @@
             this.btCancel = new System.Windows.Forms.Button();
             this.nudTime2Cook = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
-            this.btRemoveProduct = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
             this.cbCategory = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.nudImportance = new System.Windows.Forms.NumericUpDown();
             this.panAdd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudTime2Cook)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudImportance)).BeginInit();
             this.SuspendLayout();
             // 
             // tbName
@@ -98,12 +99,12 @@
             // 
             // panAdd
             // 
+            this.panAdd.Controls.Add(this.nudImportance);
             this.panAdd.Controls.Add(this.btRemoveProduct);
             this.panAdd.Controls.Add(this.btAddProduct);
             this.panAdd.Controls.Add(this.label8);
-            this.panAdd.Controls.Add(this.tbImportace);
             this.panAdd.Controls.Add(this.label7);
-            this.panAdd.Controls.Add(this.label6);
+            this.panAdd.Controls.Add(this.lbUnit);
             this.panAdd.Controls.Add(this.tbAmount);
             this.panAdd.Controls.Add(this.label5);
             this.panAdd.Controls.Add(this.label4);
@@ -112,6 +113,16 @@
             this.panAdd.Name = "panAdd";
             this.panAdd.Size = new System.Drawing.Size(392, 49);
             this.panAdd.TabIndex = 5;
+            // 
+            // btRemoveProduct
+            // 
+            this.btRemoveProduct.Location = new System.Drawing.Point(346, 3);
+            this.btRemoveProduct.Name = "btRemoveProduct";
+            this.btRemoveProduct.Size = new System.Drawing.Size(41, 43);
+            this.btRemoveProduct.TabIndex = 9;
+            this.btRemoveProduct.Text = " -";
+            this.btRemoveProduct.UseVisualStyleBackColor = true;
+            this.btRemoveProduct.Click += new System.EventHandler(this.BtRemoveProduct_Click);
             // 
             // btAddProduct
             // 
@@ -132,13 +143,6 @@
             this.label8.TabIndex = 7;
             this.label8.Text = "%";
             // 
-            // tbImportace
-            // 
-            this.tbImportace.Location = new System.Drawing.Point(213, 22);
-            this.tbImportace.Name = "tbImportace";
-            this.tbImportace.Size = new System.Drawing.Size(54, 22);
-            this.tbImportace.TabIndex = 6;
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -148,18 +152,18 @@
             this.label7.TabIndex = 5;
             this.label7.Text = "Важность:";
             // 
-            // label6
+            // lbUnit
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(172, 25);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(40, 17);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "Штук";
+            this.lbUnit.AutoSize = true;
+            this.lbUnit.Location = new System.Drawing.Point(172, 25);
+            this.lbUnit.Name = "lbUnit";
+            this.lbUnit.Size = new System.Drawing.Size(40, 17);
+            this.lbUnit.TabIndex = 4;
+            this.lbUnit.Text = "Штук";
             // 
             // tbAmount
             // 
-            this.tbAmount.Location = new System.Drawing.Point(112, 22);
+            this.tbAmount.Location = new System.Drawing.Point(112, 20);
             this.tbAmount.Name = "tbAmount";
             this.tbAmount.Size = new System.Drawing.Size(54, 22);
             this.tbAmount.TabIndex = 3;
@@ -184,16 +188,18 @@
             // 
             // cbName
             // 
+            this.cbName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbName.FormattingEnabled = true;
-            this.cbName.Location = new System.Drawing.Point(3, 20);
+            this.cbName.Location = new System.Drawing.Point(3, 19);
             this.cbName.Name = "cbName";
             this.cbName.Size = new System.Drawing.Size(94, 24);
             this.cbName.TabIndex = 0;
+            this.cbName.SelectedIndexChanged += new System.EventHandler(this.CbName_SelectedIndexChanged);
             // 
             // cbNoon
             // 
             this.cbNoon.AutoSize = true;
-            this.cbNoon.Location = new System.Drawing.Point(85, 18);
+            this.cbNoon.Location = new System.Drawing.Point(92, 18);
             this.cbNoon.Name = "cbNoon";
             this.cbNoon.Size = new System.Drawing.Size(64, 21);
             this.cbNoon.TabIndex = 7;
@@ -213,7 +219,7 @@
             // cbEvening
             // 
             this.cbEvening.AutoSize = true;
-            this.cbEvening.Location = new System.Drawing.Point(155, 18);
+            this.cbEvening.Location = new System.Drawing.Point(162, 18);
             this.cbEvening.Name = "cbEvening";
             this.cbEvening.Size = new System.Drawing.Size(71, 21);
             this.cbEvening.TabIndex = 9;
@@ -269,16 +275,6 @@
             this.label9.Size = new System.Drawing.Size(0, 17);
             this.label9.TabIndex = 14;
             // 
-            // btRemoveProduct
-            // 
-            this.btRemoveProduct.Location = new System.Drawing.Point(346, 3);
-            this.btRemoveProduct.Name = "btRemoveProduct";
-            this.btRemoveProduct.Size = new System.Drawing.Size(41, 43);
-            this.btRemoveProduct.TabIndex = 9;
-            this.btRemoveProduct.Text = " -";
-            this.btRemoveProduct.UseVisualStyleBackColor = true;
-            this.btRemoveProduct.Click += new System.EventHandler(this.BtRemoveProduct_Click);
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -320,6 +316,7 @@
             // 
             // cbCategory
             // 
+            this.cbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCategory.FormattingEnabled = true;
             this.cbCategory.Location = new System.Drawing.Point(613, 34);
             this.cbCategory.Name = "cbCategory";
@@ -336,6 +333,13 @@
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Ингредиенты:";
+            // 
+            // nudImportance
+            // 
+            this.nudImportance.Location = new System.Drawing.Point(213, 20);
+            this.nudImportance.Name = "nudImportance";
+            this.nudImportance.Size = new System.Drawing.Size(54, 22);
+            this.nudImportance.TabIndex = 11;
             // 
             // AddRecipe
             // 
@@ -365,6 +369,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudImportance)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -379,9 +384,8 @@
         private System.Windows.Forms.Panel panAdd;
         private System.Windows.Forms.Button btAddProduct;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox tbImportace;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lbUnit;
         private System.Windows.Forms.TextBox tbAmount;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -401,5 +405,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cbCategory;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.NumericUpDown nudImportance;
     }
 }

@@ -65,7 +65,7 @@
             this.productToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(918, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(918, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -74,7 +74,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(59, 26);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
             this.fileToolStripMenuItem.Text = "Файл";
             // 
             // exitToolStripMenuItem
@@ -90,7 +90,7 @@
             this.editToolStripMenuItem,
             this.removeToolStripMenuItem});
             this.recipeToolStripMenuItem.Name = "recipeToolStripMenuItem";
-            this.recipeToolStripMenuItem.Size = new System.Drawing.Size(71, 26);
+            this.recipeToolStripMenuItem.Size = new System.Drawing.Size(71, 24);
             this.recipeToolStripMenuItem.Text = "Рецепт";
             // 
             // addToolStripMenuItem
@@ -119,7 +119,7 @@
             this.editToolStripMenuItem1,
             this.removeToolStripMenuItem1});
             this.productToolStripMenuItem.Name = "productToolStripMenuItem";
-            this.productToolStripMenuItem.Size = new System.Drawing.Size(80, 26);
+            this.productToolStripMenuItem.Size = new System.Drawing.Size(80, 24);
             this.productToolStripMenuItem.Text = "Продукт";
             // 
             // addToolStripMenuItem1
@@ -146,7 +146,7 @@
             this.lbTime.AutoSize = true;
             this.lbTime.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lbTime.Font = new System.Drawing.Font("Ink Free", 16F);
-            this.lbTime.Location = new System.Drawing.Point(826, -6);
+            this.lbTime.Location = new System.Drawing.Point(809, -6);
             this.lbTime.Name = "lbTime";
             this.lbTime.Size = new System.Drawing.Size(81, 34);
             this.lbTime.TabIndex = 1;
@@ -249,6 +249,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(918, 505);
             this.Controls.Add(this.lbProducts);
             this.Controls.Add(this.panAdd);

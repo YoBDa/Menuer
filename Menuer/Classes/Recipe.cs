@@ -11,11 +11,11 @@ namespace Menuer
     {
         private string name;
         private double calories; // KCalories per 100g of product
-        private Product[] Products;
-        private double[] weights;
-        private double[] importances;
-        private int cookingTime;
-        private int category;
+        private Product[] Products; //array of used products
+        private double[] weights; //array of products's weights
+        private double[] importances; // array of products's importances
+        private int cookingTime; // cooking time in minuters
+        private int category; //category of recipe 0 to 5
         public Recipe()
         {
 
@@ -27,7 +27,7 @@ namespace Menuer
             {
                 try
                 {
-                    if (value > 5) throw new Exception("Wrong category ID");
+                    if (value > 5 && value < 0) throw new Exception("Wrong category ID");
                     else category = value;
                 }
                 catch (Exception e)
@@ -36,6 +36,7 @@ namespace Menuer
                 }
             } 
         }
+
         public int CookingTime
         {
             get { return cookingTime; }

@@ -13,6 +13,7 @@ namespace Menuer.Forms
     public partial class AddRecipe : Form
     {
         Product[] products;
+        DataTable unitsTable = new DataTable();
         DataTable productsTable = new DataTable();
         DataTable categoriesTable = new DataTable();
 
@@ -35,11 +36,8 @@ namespace Menuer.Forms
                 MessageBox.Show("Неверное количество!", "Внимание!");
                 return;
             }
-            if (!double.TryParse(tbImportace.Text, out double importance))
-            {
-                MessageBox.Show("Неверная важность!", "Внимание!");
-                return;
-            }
+            int importance = (int)nudImportance.Value;
+            
             
             if (name == "" || amount == 0 || (importance < 0 && importance > 100))
             {
@@ -66,18 +64,22 @@ namespace Menuer.Forms
         {
             string productsQuery = "SELECT ID, Name, Calories, Amount, UnitID, Cost FROM Products";
             string categoryQuery = "SELECT ID, Category FROM Categories";
+            string unitsQuery = "SELECT ID,Unit FROM Units";
+            unitsTable = DBOps.ReadDB(unitsQuery);
             categoriesTable = DBOps.ReadDB(categoryQuery);
             productsTable = DBOps.ReadDB(productsQuery);
             products = new Product[productsTable.Rows.Count];
             for (int i = 0; i < products.Length; i++)
             {
+                
                 products[i] = new Product();
                 cbName.Items.Add(productsTable.Rows[i].ItemArray[1]);
+                products[i].ID = (int)productsTable.Rows[i].ItemArray[0];
                 products[i].Name = productsTable.Rows[i].ItemArray[1].ToString();
                 products[i].Calories = (double)productsTable.Rows[i].ItemArray[2];
                 products[i].Amount = (double)productsTable.Rows[i].ItemArray[3];
-                products[i].Unit = int.Parse(productsTable.Rows[i].ItemArray[4].ToString());
-                products[i].Cost = int.Parse(productsTable.Rows[i].ItemArray[5].ToString());
+                products[i].Unit = (int)productsTable.Rows[i].ItemArray[4];
+                products[i].Cost = (int)productsTable.Rows[i].ItemArray[5];
             }
             for (int i = 0; i < categoriesTable.Rows.Count; i++)
             {
@@ -89,13 +91,17 @@ namespace Menuer.Forms
 
         private void BtAddRecipe_Click(object sender, EventArgs e)
         {
+            if (tbName.Text == "") { MessageBox.Show("Имя не может быть пустым.", "Ошибка");  return; } 
+            if (!cbEvening.Checked & !cbMorning.Checked & !cbNoon.Checked) { MessageBox.Show("Выберите хоть одно время суток.", "Ошибка"); return; }
+            if (lbProducts.Items.Count == 0) { MessageBox.Show("В рецепте должен быть хотя бы один продукт.", "Ошибка"); return; }
+            if (cbCategory.SelectedItem == null) { MessageBox.Show("Выберите категорию.", "Ошибка"); return; }
             string RecipeName = tbName.Text;
             bool[] Times = { cbMorning.Checked, cbNoon.Checked, cbEvening.Checked };
             string RecipeText = tbDescription.Text;
-            string RecipeQuery = $"INSERT INTO Recipe ('Name','RecipeText','isMorning','isNoon','isEvening')" +
-                $"VALUES ('{RecipeName}','{RecipeText}','{Times[0]}','{Times[1]}','{Times[2]}')";
+            string RecipeQuery = $"INSERT INTO Recipes ('Name','RecipeText','isMorning','isNoon','isEvening')" +
+                $"VALUES ('{RecipeName}','{RecipeText}','{Times[0]}','{Times[1]}','{Times[2]}')"; // Sending recipe to db
             DBOps.WriteDB(RecipeQuery);
-            DataTable cache = DBOps.ReadDB("SELECT ID FROM Recipe");
+            DataTable cache = DBOps.ReadDB("SELECT ID FROM Recipes");
             string recipeid = cache.Rows[cache.Rows.Count - 1].ItemArray[0].ToString();
             for (int i = 0; i < products.Length; i++)
             {
@@ -127,8 +133,7 @@ namespace Menuer.Forms
                 int fi = SI.ToString().IndexOf('x');
                 for (int i = 0; i < products.Length; i++)
                 {
-                    
-                    if (products[i].Name == SI.ToString().Substring(0, fi-1));
+                    if (products[i].Name == SI.ToString().Substring(0, fi-1))
                     {
                         products[i].Used = false;
                         lbProducts.Items.Remove(SI);
@@ -136,6 +141,16 @@ namespace Menuer.Forms
                     }
                 }
             }
+        }
+
+        private void CbName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int id = 0;
+            for (int i = 0; i < products.Length; i++)
+            {
+                if (products[i].Name == cbName.Text) id = products[i].Unit;
+            }
+            lbUnit.Text = unitsTable.Rows[id - 1].ItemArray[1].ToString();
         }
     }
 }
